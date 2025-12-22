@@ -88,13 +88,7 @@ static unsigned int oops_limit = 10000;
 
 #ifdef CONFIG_SYSCTL
 static const struct ctl_table kern_exit_table[] = {
-	{
-		.procname       = "oops_limit",
-		.data           = &oops_limit,
-		.maxlen         = sizeof(oops_limit),
-		.mode           = 0644,
-		.proc_handler   = proc_douintvec,
-	},
+	SYSCTL_ENTRY("oops_limit", oops_limit, uint, 0644),
 };
 
 static __init int kernel_exit_sysctls_init(void)

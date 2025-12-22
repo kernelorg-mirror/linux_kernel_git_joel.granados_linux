@@ -63,15 +63,9 @@ static struct ctl_table_root set_root = {
 static long ue_zero = 0;
 static long ue_int_max = INT_MAX;
 
-#define UCOUNT_ENTRY(name)					\
-	{							\
-		.procname	= name,				\
-		.maxlen		= sizeof(long),			\
-		.mode		= 0644,				\
-		.proc_handler	= proc_doulongvec_minmax,	\
-		.extra1		= &ue_zero,			\
-		.extra2		= &ue_int_max,			\
-	}
+#define UCOUNT_ENTRY(name)	\
+	SYSCTL_RANGE_ENTRY(name, SYSCTL_NULL, ulong, 0644, &ue_zero, &ue_int_max)
+
 static const struct ctl_table user_table[] = {
 	UCOUNT_ENTRY("max_user_namespaces"),
 	UCOUNT_ENTRY("max_pid_namespaces"),
